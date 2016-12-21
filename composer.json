@@ -1,11 +1,11 @@
 {
-    "name": "mstfleri/http-batch-bundle",
+    "name": "ideasoft/http-batch-bundle",
     "description": "Http batch server implementation for symfony via sub requests.",
     "license": "MIT",
     "authors": [
         {
-            "name": "Mustafa Ileri",
-            "email": "mi@mustafaileri.com"
+            "name": "IdeasoftLabs",
+            "email": "labs@ideasoft.com.tr"
         }
     ],
     "require": {
@@ -20,7 +20,7 @@
     "autoload":
     {
         "psr-4": {
-            "Hezarfen\\HttpBatchBundle\\": ""
+            "IdeasoftLabs\\HttpBatchBundle\\": ""
         }
     }
 
