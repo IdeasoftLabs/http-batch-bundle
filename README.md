@@ -3,7 +3,7 @@ HttpBatchBundle is a plugin for symfony ,that implement multipart/batch method.T
 ### What is multipart/batch
 Http multipart/batch is a format for packaging multiple HTTP requests in a single request. You can read this draft for more info: https://tools.ietf.org/id/draft-snell-http-batch-00.html
 
-###### You can decrease you request count (especially on api) with HTTPBatchBundle.
+###### You can decrease you request count (especially on api) with HttpBatchBundle.
 ### Installing HttpBatchBundle
 The easiest way to install HttpBatchBundle is through composer.
 ```bash
@@ -35,6 +35,6 @@ imports:
 That's all. Now you can use http batch implementation on your symfony project.
 You can test it with Postman or anything else.
 
-### Do yuo need a multipart/batch client for php?
+### Do you need a multipart/batch client for php?
 You're lucky! You can try
 https://github.com/mustafaileri/http-batch-client
