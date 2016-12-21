@@ -1,5 +1,5 @@
 ### HttpBatchBundle
-HttpBatchBundle is a plugin for symfony ,that implement multipart/batch method.
+HttpBatchBundle is a plugin for symfony ,that implement multipart/batch method.This implementation uses sub requests.
 ### What is multipart/batch
 Http multipart/batch is a format for packaging multiple HTTP requests in a single request. You can read this draft more info: https://tools.ietf.org/id/draft-snell-http-batch-00.html
 
