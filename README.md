@@ -7,7 +7,7 @@ Http multipart/batch is a format for packaging multiple HTTP requests in a singl
 ### Installing HttpBatchBundle
 The easiest way to install HttpBatchBundle is through composer.
 ```bash
-composer require mstfleri/http-batch-bundle
+composer require ideasoft/http-batch-bundle
 ```
 Do not forget register to AppKernel.php
 ```php
