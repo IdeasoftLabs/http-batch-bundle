@@ -13,7 +13,7 @@ Do not forget register to AppKernel.php
 ```php
 $bundles = [
             ...
-            new \Hezarfen\HttpBatchBundle\HttpBatchBundle()
+            new \Ideasoft\HttpBatchBundle\HttpBatchBundle()
         ];
 ```
 Now lets configurate it!

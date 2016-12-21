@@ -1,9 +1,9 @@
 <?php
-namespace Hezarfen\HttpBatchBundle\EventListener;
+namespace Ideasoft\HttpBatchBundle\EventListener;
 
 
-use Hezarfen\HttpBatchBundle\Annotation\BatchRequest;
-use Hezarfen\HttpBatchBundle\Handler;
+use Ideasoft\HttpBatchBundle\Annotation\BatchRequest;
+use Ideasoft\HttpBatchBundle\Handler;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;

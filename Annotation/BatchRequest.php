@@ -1,6 +1,6 @@
 <?php
 
-namespace Hezarfen\HttpBatchBundle\Annotation;
+namespace Ideasoft\HttpBatchBundle\Annotation;
 
 use Doctrine\Common\Annotations\Annotation;
 use Doctrine\Common\Annotations\Annotation\Target;

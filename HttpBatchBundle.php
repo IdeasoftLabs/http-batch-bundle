@@ -1,6 +1,6 @@
 <?php
 
-namespace Hezarfen\HttpBatchBundle;
+namespace Ideasoft\HttpBatchBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

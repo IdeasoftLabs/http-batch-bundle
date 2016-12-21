@@ -1,7 +1,7 @@
 <?php
-namespace Hezarfen\HttpBatchBundle;
+namespace Ideasoft\HttpBatchBundle;
 
-use Hezarfen\HttpBatchBundle\Message\Response;
+use Ideasoft\HttpBatchBundle\Message\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Kernel;

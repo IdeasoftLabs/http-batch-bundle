@@ -1,11 +1,11 @@
 services:
     http_batch.handler:
-        class: Hezarfen\HttpBatchBundle\Handler
+        class: Ideasoft\HttpBatchBundle\Handler
         arguments:
             - '@kernel'
 
     http_batch.request.listener:
-        class: Hezarfen\HttpBatchBundle\EventListener\RequestListener
+        class: Ideasoft\HttpBatchBundle\EventListener\RequestListener
         autowire: true
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
