@@ -37,4 +37,4 @@ You can test it with Postman or anything else.
 
 ### Do you need a multipart/batch client for php?
 You're lucky! You can try
-https://github.com/mustafaileri/http-batch-client
+https://github.com/IdeasoftLabs/http-batch-client
