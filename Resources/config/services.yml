@@ -7,7 +7,7 @@ services:
     http_batch.request.listener:
         class: Ideasoft\HttpBatchBundle\EventListener\RequestListener
         arguments:
-            - '@annotations.reader',
+            - '@annotations.reader'
             - '@http_batch.handler'
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
