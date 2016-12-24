@@ -37,9 +37,9 @@ imports:
 ```
 
 That's all. Now you can use http batch implementation on your symfony project.
-Your batch request url is http://your-domain/batch. You should post your batch request to this url.
-Yo can change it from routing.yml if you want.
-You can test it with Postman or anything else.
+Your batch request url is http://your-domain/batch. 
+
+You should post your batch request to this url.You can change it from routing.yml if you want. You can test it with Postman or anything else.
 
 ### Do you need a multipart/batch client for PHP?
 You're lucky! You can try
