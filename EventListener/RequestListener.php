@@ -1,30 +1,36 @@
 <?php
-namespace Ideasoft\HttpBatchBundle\EventListener;
 
+namespace Ideasoft\HttpBatchBundle\EventListener;
 
 use Ideasoft\HttpBatchBundle\Annotation\BatchRequest;
 use Ideasoft\HttpBatchBundle\Handler;
 use Doctrine\Common\Annotations\AnnotationReader;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class RequestListener
 {
-
     /** @var  AnnotationReader */
     private $annotationReader;
 
     /** @var  Handler */
     private $batchRequestHandler;
 
+    /**
+     * RequestListener constructor.
+     * @param AnnotationReader $annotationReader
+     * @param Handler $batchRequestHandler
+     */
     public function __construct(AnnotationReader $annotationReader, Handler $batchRequestHandler)
     {
         $this->annotationReader = $annotationReader;
         $this->batchRequestHandler = $batchRequestHandler;
     }
 
+    /**
+     * @param FilterControllerEvent $event
+     */
     public function onKernelController(FilterControllerEvent $event)
     {
         if ($event->isMasterRequest()) {
@@ -46,7 +52,7 @@ class RequestListener
                 });
             }
         }
-        return;
 
+        return;
     }
 }
