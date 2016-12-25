@@ -1,0 +1,3 @@
+<?php
+$vendorDir = __DIR__ . '/../vendor';
+$loader = require $vendorDir . '/autoload.php';

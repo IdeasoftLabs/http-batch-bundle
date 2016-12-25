@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit colors="true" processIsolation="false" stopOnFailure="false" bootstrap="./Test/bootstrap.php">
+    <testsuites>
+        <testsuite name="HttpBatchBundle Test Suite">
+            <directory>./Test</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <exclude>
+                <directory>vendor</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>

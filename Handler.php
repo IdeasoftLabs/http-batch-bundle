@@ -2,7 +2,9 @@
 namespace Ideasoft\HttpBatchBundle;
 
 use Ideasoft\HttpBatchBundle\Message\Response;
+use Symfony\Bundle\FrameworkBundle\Tests\Functional\app\AppKernel;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -17,33 +19,54 @@ class Handler
     /** @var  Request */
     private $batchRequest;
 
-    public function __construct(\AppKernel $kernel)
+    /**
+     * Handler constructor.
+     * @param AppKernel $kernel
+     */
+    public function __construct(AppKernel $kernel)
     {
         $this->kernel = $kernel;
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function handle(Request $request)
     {
         $this->batchRequest = $request;
         return $this->parseRequest($request);
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     private function parseRequest(Request $request)
     {
         $this->getBatchHeader($request);
         $subRequests = $this->getSubRequests($request);
-        return $this->getBatchRequest($subRequests);
+        return $this->getBatchRequestResponse($subRequests);
 
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     private function getBatchHeader(Request $request)
     {
         $headers = $request->headers->all();
         $contentType = $request->headers->get("content-type");
-        $this->parseBoundary($contentType);
+        $this->boundary = $this->parseBoundary($contentType);
         return $headers;
     }
 
+    /**
+     * @param $contentType
+     * @return string
+     * @throws \HttpHeaderException
+     */
     private function parseBoundary($contentType)
     {
         if (!$contentType) {
@@ -54,12 +77,22 @@ class Handler
         foreach ($contentTypeData as $data) {
             $contentTypePart = explode("=", $data);
             if (sizeof($contentTypePart) == 2 && trim($contentTypePart[0]) == "boundary") {
-                $this->boundary = trim($contentTypePart[1]);
+                $boundary = trim($contentTypePart[1]);
                 break;
             }
         }
+        if (isset($boundary)) {
+            return $boundary;
+        } else {
+            throw new BadRequestHttpException("Boundary can not be found.");
+        }
+
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     */
     private function getSubRequests(Request $request)
     {
         $subRequests = [];
@@ -83,6 +116,10 @@ class Handler
         return $subRequests;
     }
 
+    /**
+     * @param \GuzzleHttp\Psr7\Request $guzzleRequest
+     * @return Request
+     */
     private function convertGuzzleRequestToSymfonyRequest(\GuzzleHttp\Psr7\Request $guzzleRequest)
     {
         $url = $guzzleRequest->getUri()->getPath();
@@ -94,10 +131,17 @@ class Handler
         $content = $guzzleRequest->getBody();
 
         $symfonyRequest = Request::create($url, $method, $params, $cookies, $files, $server, $content);
+        foreach ( $guzzleRequest->getHeaders() as $key => $value)  {
+            $symfonyRequest->headers->set($key, $value);
+        }
         return $symfonyRequest;
     }
 
-    private function getBatchRequest(array $subRequests)
+    /**
+     * @param array $subRequests
+     * @return Response
+     */
+    private function getBatchRequestResponse(array $subRequests)
     {
         $subResponses = [];
         foreach ($subRequests as $subRequest) {
@@ -106,6 +150,10 @@ class Handler
         return $this->generateBatchResponseFromSubResponses($subResponses);
     }
 
+    /**
+     * @param $subResponses
+     * @return Response
+     */
     private function generateBatchResponseFromSubResponses($subResponses)
     {
         $response = new Response();
@@ -118,12 +166,16 @@ class Handler
             $contentForSubResponses[] = $this->generateSubResponseFromContent($subResponse);
         }
         $content = "--" . $this->boundary . PHP_EOL;
-        $content .= implode(PHP_EOL . "--" . $this->boundary . PHP_EOL, $contentForSubResponses) . PHP_EOL;
+        $content .= implode(PHP_EOL . "--" . $this->boundary . PHP_EOL, $contentForSubResponses);
         $content .= "--" . $this->boundary . "--" . PHP_EOL;
         $response->setContent($content);
         return $response;
     }
 
+    /**
+     * @param \Symfony\Component\HttpFoundation\Response $response
+     * @return string
+     */
     private function generateSubResponseFromContent(\Symfony\Component\HttpFoundation\Response $response)
     {
         $content = '';
@@ -136,8 +188,7 @@ class Handler
             $content .= sprintf("%s:%s" . PHP_EOL, $key, implode(",", $value));
         }
         $content .= PHP_EOL;
-        $content .= $response->getContent();
+        $content .= trim($response->getContent());
         return $content;
-
     }
 }
