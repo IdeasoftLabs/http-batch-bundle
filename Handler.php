@@ -2,11 +2,11 @@
 namespace Ideasoft\HttpBatchBundle;
 
 use Ideasoft\HttpBatchBundle\Message\Response;
-use Symfony\Bundle\FrameworkBundle\Tests\Functional\app\AppKernel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 class Handler
 {
@@ -23,7 +23,7 @@ class Handler
      * Handler constructor.
      * @param AppKernel $kernel
      */
-    public function __construct(AppKernel $kernel)
+    public function __construct(KernelInterface $kernel)
     {
         $this->kernel = $kernel;
     }
