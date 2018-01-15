@@ -1,5 +1,4 @@
 <?php
-
 namespace Ideasoft\HttpBatchBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;

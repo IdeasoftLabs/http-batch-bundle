@@ -1,5 +1,4 @@
 <?php
-
 namespace Ideasoft\HttpBatchBundle\Annotation;
 
 use Doctrine\Common\Annotations\Annotation;

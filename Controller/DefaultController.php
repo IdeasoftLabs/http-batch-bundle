@@ -1,5 +1,4 @@
 <?php
-
 namespace Ideasoft\HttpBatchBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

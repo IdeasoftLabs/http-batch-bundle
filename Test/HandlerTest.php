@@ -1,7 +1,5 @@
 <?php
-
 namespace Ideasoft\HttpBatchBundle\Test;
-
 
 use Ideasoft\HttpBatchBundle\Handler;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -11,13 +9,19 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HandlerTest extends WebTestCase
 {
-    /** @var  Handler */
+    /**
+     * @var Handler $handler
+     */
     private $handler;
 
-    /** @var  Request */
+    /**
+     * @var Request $batchRequest
+     */
     private $batchRequest;
 
-    /** @var string */
+    /**
+     * @var string $boundary
+     */
     private $boundary = "test-boundary";
 
     public function setUp()
@@ -83,7 +87,6 @@ EOT;
         $this->assertTrue(200 == $response->getStatusCode());
         $this->assertContains('sample_response_key', $response->getContent());
         $this->assertTrue(sizeof($subResponses) == 3);
-
     }
 
     public function testGetBatchHeader()

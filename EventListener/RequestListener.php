@@ -1,5 +1,4 @@
 <?php
-
 namespace Ideasoft\HttpBatchBundle\EventListener;
 
 use Ideasoft\HttpBatchBundle\Annotation\BatchRequest;
@@ -11,14 +10,17 @@ use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class RequestListener
 {
-    /** @var  AnnotationReader */
+    /**
+     * @var AnnotationReader $annotationReader
+     */
     private $annotationReader;
 
-    /** @var  Handler */
+    /**
+     * @var Handler $batchRequestHandler
+     */
     private $batchRequestHandler;
 
     /**
-     * RequestListener constructor.
      * @param AnnotationReader $annotationReader
      * @param Handler $batchRequestHandler
      */
@@ -52,7 +54,5 @@ class RequestListener
                 });
             }
         }
-
-        return;
     }
 }
